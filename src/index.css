@@ -1,0 +1,173 @@
+:root {
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+  color-scheme: light dark;
+  color: rgba(255, 255, 255, 0.87);
+  background-color: #242424;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  --b-radius: 4px;
+}
+
+#root {
+  width: 100%;
+}
+#root:only-child {
+  width: fit-content;
+  margin: 0 auto;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  font-family: "Ubuntu";
+  /* transition: color, fill, 200ms; */
+}
+html {
+  scroll-behavior: smooth;
+}
+body {
+  margin: 0;
+  padding: 0;
+  font-weight: 400;
+  font-family: "Ubuntu", "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI",
+    "Roboto", "Oxygen", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  position: relative;
+}
+
+button {
+  border: 0;
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    color: #213547;
+    background-color: #ffffff;
+  }
+  a:hover {
+    color: #747bff;
+  }
+  button {
+    background-color: #f9f9f9;
+  }
+}
+
+/* LOGO */
+
+.complete-logo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 300px;
+  aspect-ratio: 1;
+  position: relative;
+  padding: 10px;
+  box-sizing: border-box;
+  resize: both;
+
+  /* alterar dps que for fazer efieto */
+  margin: 0 auto;
+}
+
+.car-logo {
+  position: relative;
+  width: 100%;
+  padding-top: 100%; /* Mantém a proporção 1:1 */
+}
+
+.car-logo img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain; /* Mantém a proporção */
+}
+
+.text-logo {
+  position: absolute;
+  width: fit-content;
+  right: 11%;
+  bottom: 24%;
+}
+.text-logo > div:nth-child(1) {
+  font-family: "Inter";
+  font-weight: 700;
+  font-size: 28px;
+  line-height: 0.5;
+  text-align: right;
+}
+.text-logo > div:nth-child(2) {
+  font-size: 14px;
+  font-family: "Ubuntu Mono", monospace;
+  font-weight: 400;
+  font-style: italic;
+}
+.codes {
+  display: grid;
+  gap: 10px;
+  max-width: 60%;
+  margin: 0 auto;
+}
+.toogle-code button {
+  cursor: pointer;
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  padding: 14px 14px;
+  border: 1px solid rgb(218, 218, 218);
+  background-color: #ffffff;
+  border-radius: var(--b-radius);
+  transition: all 100ms;
+}
+.toogle-code button:hover {
+  border: 1px solid rgb(0, 0, 0);
+}
+.btn {
+  border-radius: var(--b-radius);
+  font-weight: 500;
+  padding: 10px 14px;
+  background-color: #242424;
+  width: fit-content;
+  color: #f9f9f9;
+  cursor: pointer;
+}
+.btn.add-test {
+  background-color: #ffffff;
+  color: #000000;
+  transition: all 200ms;
+}
+.btn.add-test:hover {
+  background-color: #ffffff;
+  color: #000000;
+  text-decoration: underline;
+}
+.btn.run-test {
+  background-color: #000000;
+  color: #ffffff;
+  font-weight: 600;
+  transition: all 200ms;
+  box-shadow: inset 0 0 0 0 #fac100;
+  transform-origin: left;
+}
+.btn.run-test:hover {
+  font-weight: 600;
+  box-shadow: inset 90px 0 5px 0 #fac100;
+  color: #000000;
+}
+.test-btns {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.err {
+  color: #c60202;
+}
