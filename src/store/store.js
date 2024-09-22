@@ -3,7 +3,7 @@ import codeTestSlice from "../codeTest/codeTestSlice";
 
 const store = configureStore({
   reducer: {
-    codeTest: codeTestSlice.reducer,
+    codeTest: codeTestSlice,
   },
 });
 

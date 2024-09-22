@@ -10,6 +10,8 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   --b-radius: 4px;
+  --b-radius-top: var(--b-radius) var(--b-radius) 0 0;
+  --b-radius-bot: 0 0 var(--b-radius) var(--b-radius);
 }
 
 #root {
@@ -122,13 +124,32 @@ button {
   width: 100%;
   justify-content: space-between;
   padding: 14px 14px;
-  border: 1px solid rgb(218, 218, 218);
+  border: 1px solid #dadada;
   background-color: #ffffff;
   border-radius: var(--b-radius);
   transition: all 100ms;
 }
+.toogle-code.open button {
+  border-radius: var(--b-radius-top);
+}
+.open .code-box {
+  border-radius: var(--b-radius-bot);
+  border: 1px solid #dadada;
+  border-top: 0;
+}
+.code-box > div {
+  border-radius: var(--b-radius-bot);
+}
+.open .code-box > div > div {
+  height: fit-content;
+  transition: all 200ms;
+}
+.code-box > div > div {
+  height: 0;
+  transition: all 200ms;
+}
 .toogle-code button:hover {
-  border: 1px solid rgb(0, 0, 0);
+  border: 1px solid #000000;
 }
 .btn {
   border-radius: var(--b-radius);
