@@ -136,9 +136,13 @@ button {
   border-radius: var(--b-radius-bot);
   border: 1px solid #dadada;
   border-top: 0;
+  display: flex;
+  flex-direction: row;
 }
 .code-box > div {
   border-radius: var(--b-radius-bot);
+  width: 0;
+  flex-grow: 1;
 }
 .open .code-box > div > div {
   height: fit-content;
