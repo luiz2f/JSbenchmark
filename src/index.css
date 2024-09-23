@@ -12,6 +12,7 @@
   --b-radius: 4px;
   --b-radius-top: var(--b-radius) var(--b-radius) 0 0;
   --b-radius-bot: 0 0 var(--b-radius) var(--b-radius);
+  --light-bdr: 1px solid #dadada;
 }
 
 #root {
@@ -117,43 +118,54 @@ button {
   gap: 10px;
   max-width: 60%;
   margin: 0 auto;
+  margin-bottom: 48px;
 }
-.toogle-code button {
+.toogle-code > button {
   cursor: pointer;
   display: flex;
+  align-items: center;
   width: 100%;
   justify-content: space-between;
-  padding: 14px 14px;
+  padding: 8px 14px;
   border: 1px solid #dadada;
   background-color: #ffffff;
   border-radius: var(--b-radius);
-  transition: all 100ms;
+  transition: all 200ms;
 }
-.toogle-code.open button {
+.toogle-code.open > button {
   border-radius: var(--b-radius-top);
 }
 .open .code-box {
   border-radius: var(--b-radius-bot);
-  border: 1px solid #dadada;
+  border: var(--light-bdr);
   border-top: 0;
   display: flex;
   flex-direction: row;
+  position: relative;
 }
 .code-box > div {
   border-radius: var(--b-radius-bot);
   width: 0;
   flex-grow: 1;
 }
+.code-box > div > div,
+.code-box > div > div > div {
+  border-radius: var(--b-radius-bot);
+}
 .open .code-box > div > div {
   height: fit-content;
   transition: all 200ms;
+}
+
+.toogle-code.open .icon svg {
+  transform: rotate(-180deg);
 }
 .code-box > div > div {
   height: 0;
   transition: all 200ms;
 }
-.toogle-code button:hover {
-  border: 1px solid #000000;
+.toogle-code > button:hover {
+  border: 1px solid #212121;
 }
 .btn {
   border-radius: var(--b-radius);
@@ -195,4 +207,26 @@ button {
 
 .err {
   color: #c60202;
+}
+.flex {
+  display: flex;
+}
+.open .delete {
+  display: flex;
+}
+.delete {
+  display: none;
+}
+.delete,
+.icon {
+  z-index: 5;
+  background-color: white;
+  border-radius: 4px;
+  padding: 6px;
+}
+.delete:hover {
+  z-index: 5;
+  background-color: white;
+  border-radius: 4px;
+  padding: 6px;
 }
