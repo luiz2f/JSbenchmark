@@ -2,6 +2,7 @@ import { useDispatch, useSelector } from "react-redux";
 import CodeEditor from "./CodeEditor";
 import { useState } from "react";
 import { addTestCode, runTests } from "../codeTest/codeTestSlice";
+import Setup from "../setup/Setup";
 
 function Codes() {
   const { testCodes, setupCode } = useSelector((state) => state.codeTest);
@@ -20,11 +21,14 @@ function Codes() {
 
   return (
     <div className="codes">
+      <Setup />
+
       <CodeEditor isTest={false} code={setupCode} />
       {testCodes.map((_, index) => {
         const test = testCodes[index];
         return (
           <CodeEditor
+            index={index}
             key={test?.id}
             id={test?.id}
             name={test?.name}

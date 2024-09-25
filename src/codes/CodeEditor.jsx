@@ -10,7 +10,7 @@ import {
   updateTestCode,
 } from "../codeTest/codeTestSlice";
 
-function CodeEditor({ name, id, isTest, code }) {
+function CodeEditor({ name, id, isTest, code, index }) {
   const dispatch = useDispatch();
   const [open, setOpen] = useState(true);
   const [testCode, setTestCode] = useState(code);
@@ -24,7 +24,6 @@ function CodeEditor({ name, id, isTest, code }) {
     // talvez reestruturar depois pra mudança só ocorrer na hora do run
     setTestCode(e);
     if (isTest) {
-      console.log(1);
       dispatch(updateTestCode({ id, name: testName, code: e }));
     } else {
       dispatch(updateSetupCode(e));
@@ -39,7 +38,7 @@ function CodeEditor({ name, id, isTest, code }) {
   return (
     <div className={`toogle-code ${open ? "open" : ""} `}>
       <button onClick={() => setOpen((prev) => !prev)}>
-        <div>{testName}</div>
+        <div style={{ color: `var(--color${index + 1})` }}>{testName}</div>
         <div className="flex">
           <div className="icon">
             <LuChevronDown />
@@ -53,6 +52,7 @@ function CodeEditor({ name, id, isTest, code }) {
       </button>
       <div className="code-box">
         <ReactCodeMirror
+          maxHeight="80vh"
           value={testCode}
           onChange={(e) => handleChange(e)}
           theme={customVscodeLight}

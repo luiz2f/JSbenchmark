@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { useDispatch } from "react-redux";
 const letters = [
   "C",
   "D",
@@ -30,65 +31,47 @@ const initialState = {
   iterations: 5000,
   // estado inicial
   setupCode: `// setup your data or function to be called
-  const data = [
-  { value: 1, description: "Um" },
-  { value: 2, description: "Dois" },
-  { value: 3, description: "Três" },
-  { value: 4, description: "Quatro" },
-  { value: 5, description: "Cinco" },
-  { value: 6, description: "Seis" },
-  { value: 7, description: "Sete" },
-  { value: 8, description: "Oito" },
-  { value: 9, description: "Nove" },
-  { value: 10, description: "Dez" },
-];`,
+  const arr = [0,10,20,30, 25, 15, 12, 2, 143, 15, 0, 10, 20, 30, 25, 15, 12, 2, 143, 15, 10, 20, 10, 20, 30, 25, 15, 12, 2, 143,
+  1, 0, 10, 20, 30, 25, 15, 12, 2, 143, 15, 10, 20, 10, 20, 30, 25, 15, 12, 2,
+  143, 1, 0, 10, 20, 30, 25, 15, 12, 2, 143, 15, 10, 20, 10, 20, 30, 25, 15, 12,
+  2, 143, 1, 0, 10, 20, 30, 25, 15, 12, 2, 143, 15, 10, 20, 10, 20, 30, 25, 15,
+  12, 2, 143, 1,]
+  function greaterThan10(n) { return n > 10}
+  `,
   testCodes: [
     {
       id: 1,
       name: "Test A",
-      code: `//  insert your function
-      function sumEvensAndOdds(arr) {
-    const evenSum = arr
-      .filter(({ value }) => value % 2 === 0)
-      .reduce((acc, { value }) => acc + value, 0);
-      
-    const oddSum = arr
-      .filter(({ value }) => value % 2 !== 0)
-      .reduce((acc, { value }) => acc + value, 0);
-
-    return { evenSum, oddSum };
-  }
-  //  call her
-  sumEvensAndOdds(data)`,
+      code: `var filter = function (arr, fn) {
+    let ans = [];
+    for (var i = 0; i < arr.length; i++) {
+         if(fn(arr[i], i)){ 
+            ans.push(arr[i]) 
+            }
+    }
+    return ans
+};
+filter(arr, greaterThan10)`,
     },
     {
       id: 2,
       name: "Test B",
-      code: `//  insert your function
-      function sumEvensAndOdds(arr) {
-    const sums = { evenSum: 0, oddSum: 0 };
-
-    for (let i = 0; i < arr.length; i++) {
-      if (arr[i].value % 2 === 0) {
-        sums.evenSum += arr[i].value;
-      } else {
-        sums.oddSum += arr[i].value;
-      }
-    }
-
-    return sums;
-  }
-  //  call her
-  sumEvensAndOdds(data)`,
+      code: `var filter = function(arr, fn) {
+    return arr.filter(fn)
+};
+filter(arr, greaterThan10)`,
     },
   ],
-  results: [],
+  results: { boxplot: [], averageSpeed: [], scatter: [] },
 };
 
 const codeTestSlice = createSlice({
   name: "test",
   initialState,
   reducers: {
+    setIterations(state, action) {
+      state.iterations = action.payload;
+    },
     setSetupCode(state, action) {
       state.setupCode = action.payload;
     },
@@ -128,31 +111,33 @@ const codeTestSlice = createSlice({
       console.log("Test Codes after deletion:", state.testCodes);
     },
     runTests(state) {
-      const results = [];
-      const times = [];
+      const results = { boxplot: [], averageSpeed: [] };
       state.testCodes.forEach((test) => {
-        const testFunction = new Function(state.setupCode + test.code);
+        const testFunction = new Function(state.setupCode + "\n\n" + test.code);
         const iterations = state.iterations; // Número de vezes que deseja rodar os testes
         let totalTime = 0;
-
-        for (let i = 0; i < iterations; i++) {
+        let gotit = 0;
+        for (let i = 0; gotit < iterations; i++) {
           const startTime = performance.now();
           testFunction();
           const endTime = performance.now();
           const duration = endTime - startTime;
-          totalTime += duration;
-          times.push(duration);
+          if (duration) {
+            totalTime += duration;
+            results.boxplot.push({ name: test.name, value: duration });
+            gotit++;
+          }
         }
-
-        const averageTime = totalTime / iterations;
-        results.push({
+        results.averageSpeed.push({
           name: test.name,
-          averageTime,
-          times,
+          averageTime: totalTime / iterations,
         });
       });
+      state.results = { ...state.results, ...results };
+    },
+    setResults(state) {
+      const results = state.results;
       state.results = results;
-      console.log(results);
     },
   },
 });
@@ -165,5 +150,7 @@ export const {
   updateSetupCode,
   deleteTestCode,
   runTests,
+  setResults,
+  setIterations,
 } = codeTestSlice.actions;
 export default codeTestSlice.reducer;

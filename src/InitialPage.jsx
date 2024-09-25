@@ -1,13 +1,13 @@
 import Codes from "./codes/Codes";
 import Logo from "./Logo";
+import Results from "./results/Results";
 
 function InitialPage() {
   return (
     <>
-      <header>
-        <Logo />
-      </header>
+      <Logo />
       <Codes />
+      <Results />
     </>
   );
 }

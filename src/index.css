@@ -13,6 +13,16 @@
   --b-radius-top: var(--b-radius) var(--b-radius) 0 0;
   --b-radius-bot: 0 0 var(--b-radius) var(--b-radius);
   --light-bdr: 1px solid #dadada;
+  --color1: hsl(157, 75%, 27%);
+  --color2: hsl(120, 75%, 27%);
+  --color3: hsl(65, 75%, 27%);
+  --color4: hsl(210, 75%, 27%);
+  --color5: hsl(300, 75%, 27%);
+  --colorlg1: hsl(157, 76%, 87%);
+  --colorlg2: hsl(120, 75%, 87%);
+  --colorlg3: hsl(65, 75%, 87%);
+  --colorlg4: hsl(210, 75%, 87%);
+  --colorlg5: hsl(300, 75%, 87%);
 }
 
 #root {
@@ -74,9 +84,13 @@ button {
   padding: 10px;
   box-sizing: border-box;
   resize: both;
-
+  z-index: 5;
   /* alterar dps que for fazer efieto */
   margin: 0 auto;
+}
+header {
+  overflow-x: hidden;
+  overflow-y: hidden;
 }
 
 .car-logo {
@@ -113,12 +127,56 @@ button {
   font-weight: 400;
   font-style: italic;
 }
+.mini .car-logo {
+  width: 60%;
+  left: 38%;
+  bottom: 4%;
+}
+.mini .text-logo {
+  bottom: 24%;
+  left: 30%;
+}
+
+.mini .text-logo > div:nth-child(1) {
+  text-align: left;
+}
+.mini .complete-logo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 140px;
+  aspect-ratio: 1;
+  position: fixed;
+  padding: 10px;
+  box-sizing: border-box;
+  resize: both;
+}
+
 .codes {
   display: grid;
   gap: 10px;
   max-width: 60%;
   margin: 0 auto;
   margin-bottom: 48px;
+}
+.setup {
+  display: flex;
+  align-items: center;
+  justify-content: end;
+  gap: 14px;
+}
+.setup input {
+  padding: 3px 0 3px 13px;
+  font-size: 14px;
+  width: 70px;
+  text-align: center;
+  font-weight: 600;
+  border: none;
+  background-color: #ffffff;
+  border-radius: 8px;
+  border: 1px solid #dadada;
+  font-family: "Ubuntu";
 }
 .toogle-code > button {
   cursor: pointer;
@@ -229,4 +287,47 @@ button {
   background-color: white;
   border-radius: 4px;
   padding: 6px;
+}
+
+#results {
+  margin: 0 auto;
+  max-width: 60%;
+  display: flex;
+  flex-direction: column;
+}
+#results > svg {
+  margin: 0 auto;
+}
+#results > h2 {
+  font-family: "Inter";
+  font-weight: 700;
+  font-size: 24px;
+  margin-bottom: 14px;
+  margin-top: 36px;
+}
+#results > h1 {
+  font-family: "Ubuntu Mono", monospace;
+  font-weight: 400;
+  font-style: italic;
+  text-transform: uppercase;
+  font-size: 24px;
+}
+#results h3 {
+  font-size: 16px;
+  font-family: "Ubuntu";
+  font-weight: 400;
+  margin-bottom: 4px;
+}
+.graph-result {
+  margin-top: 12px;
+}
+.test-avg:not(:last-child) {
+  margin-bottom: 12px;
+}
+
+.avg-rect {
+  background-color: #ffecb7;
+  font-weight: 600;
+  padding: 6px 12px;
+  border-radius: var(--b-radius);
 }
