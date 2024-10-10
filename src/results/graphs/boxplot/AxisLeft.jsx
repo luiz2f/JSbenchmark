@@ -31,7 +31,7 @@ export const AxisLeft = ({ yScale, pixelsPerTick }) => {
           <text
             key={value}
             style={{
-              fontSize: "10px",
+              fontSize: "12px",
               textAnchor: "middle",
               transform: "translateX(-20px)",
             }}

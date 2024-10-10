@@ -1,10 +1,8 @@
-import { useDispatch, useSelector } from "react-redux";
-import { setIterations } from "../codeTest/codeTestSlice";
+import { useDispatch } from "react-redux";
+import { setIterations } from "../store/slices/codeTestSlice";
 
-function Setup() {
-  const { iterations } = useSelector((state) => state.codeTest);
+function Setup({ iterations }) {
   const dispatch = useDispatch();
-
   function handleChange(e) {
     dispatch(setIterations(e.target.value));
   }
@@ -14,7 +12,7 @@ function Setup() {
     if (iterations - newnum === 0) {
       newnum = 10 ** (digitCount - 2);
     }
-    return newnum;
+    return Math.max(newnum, 1);
   }
   function handleKeyDown(e) {
     // Permitir teclas de controle e números
@@ -36,8 +34,9 @@ function Setup() {
       e.preventDefault();
     }
   }
+
   return (
-    <div className="setup">
+    <div className={`setup ${iterations > 0 ? "" : "err"}`}>
       <div>Nº of iterations</div>
       <input
         pattern="\d*"

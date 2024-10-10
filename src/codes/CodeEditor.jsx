@@ -1,5 +1,5 @@
 import { javascript } from "@codemirror/lang-javascript";
-import { vscodeLightInit } from "@uiw/codemirror-theme-vscode";
+import { vscodeDark, vscodeLightInit } from "@uiw/codemirror-theme-vscode";
 import ReactCodeMirror from "@uiw/react-codemirror";
 import { useState } from "react";
 import { LuChevronDown, LuTrash2 } from "react-icons/lu";
@@ -8,17 +8,18 @@ import {
   deleteTestCode,
   updateSetupCode,
   updateTestCode,
-} from "../codeTest/codeTestSlice";
+} from "../store/slices/codeTestSlice";
 
-function CodeEditor({ name, id, isTest, code, index }) {
+function CodeEditor({ name, id, isTest, code, index, darkMode }) {
   const dispatch = useDispatch();
   const [open, setOpen] = useState(true);
   const [testCode, setTestCode] = useState(code);
-  const [testName, setTestName] = useState(name ? name : "Setup");
-
+  const testName = name ? name : "Setup";
+  const colorSt = isTest ? `var(--color${index + 1})` : "var(--color-10)";
   const customVscodeLight = vscodeLightInit({
     settings: { lineHighlight: "#99999926" },
   });
+  const theme = darkMode ? vscodeDark : customVscodeLight;
 
   function handleChange(e) {
     // talvez reestruturar depois pra mudança só ocorrer na hora do run
@@ -38,7 +39,7 @@ function CodeEditor({ name, id, isTest, code, index }) {
   return (
     <div className={`toogle-code ${open ? "open" : ""} `}>
       <button onClick={() => setOpen((prev) => !prev)}>
-        <div style={{ color: `var(--color${index + 1})` }}>{testName}</div>
+        <div style={{ color: colorSt }}>{testName}</div>
         <div className="flex">
           <div className="icon">
             <LuChevronDown />
@@ -55,7 +56,7 @@ function CodeEditor({ name, id, isTest, code, index }) {
           maxHeight="80vh"
           value={testCode}
           onChange={(e) => handleChange(e)}
-          theme={customVscodeLight}
+          theme={theme}
           extensions={[javascript({ jsx: true })]}
         />
       </div>

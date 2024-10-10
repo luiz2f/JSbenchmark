@@ -1,6 +1,5 @@
 function AverageSpeed({ averageSpeed }) {
   const maxTime = Math.max(...averageSpeed.map((item) => item.averageTime));
-  console.log(averageSpeed);
   return (
     <>
       <div className="graph-result">

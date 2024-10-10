@@ -1,5 +1,4 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { useDispatch } from "react-redux";
 const letters = [
   "C",
   "D",
@@ -28,7 +27,9 @@ const letters = [
 ];
 const defaultCode = `console.log("Hello Word!")`;
 const initialState = {
-  iterations: 5000,
+  loading: false,
+  progress: 0,
+  iterations: 1000,
   // estado inicial
   setupCode: `// setup your data or function to be called
   const arr = [0,10,20,30, 25, 15, 12, 2, 143, 15, 0, 10, 20, 30, 25, 15, 12, 2, 143, 15, 10, 20, 10, 20, 30, 25, 15, 12, 2, 143,
@@ -62,11 +63,13 @@ filter(arr, greaterThan10)`,
 filter(arr, greaterThan10)`,
     },
   ],
+
+  preResults: { boxplot: [], averageSpeed: {}, scatter: [] },
   results: { boxplot: [], averageSpeed: [], scatter: [] },
 };
 
 const codeTestSlice = createSlice({
-  name: "test",
+  name: "codeTest",
   initialState,
   reducers: {
     setIterations(state, action) {
@@ -104,20 +107,23 @@ const codeTestSlice = createSlice({
     },
     deleteTestCode(state, action) {
       const idToDelete = action.payload;
-      console.log("Deleting test with ID:", idToDelete); // Adicione um log aqui
       state.testCodes = state.testCodes.filter(
         (test) => test.id !== idToDelete
       );
-      console.log("Test Codes after deletion:", state.testCodes);
+    },
+    updateProgress(state) {
+      state.progress = state.progress + 1;
     },
     runTests(state) {
+      const test = performance.now();
       const results = { boxplot: [], averageSpeed: [] };
+      state.progress = 0;
       state.testCodes.forEach((test) => {
         const testFunction = new Function(state.setupCode + "\n\n" + test.code);
         const iterations = state.iterations; // Número de vezes que deseja rodar os testes
         let totalTime = 0;
         let gotit = 0;
-        for (let i = 0; gotit < iterations; i++) {
+        while (gotit < iterations) {
           const startTime = performance.now();
           testFunction();
           const endTime = performance.now();
@@ -126,6 +132,7 @@ const codeTestSlice = createSlice({
             totalTime += duration;
             results.boxplot.push({ name: test.name, value: duration });
             gotit++;
+            codeTestSlice.caseReducers.updateProgress(state);
           }
         }
         results.averageSpeed.push({
@@ -134,6 +141,8 @@ const codeTestSlice = createSlice({
         });
       });
       state.results = { ...state.results, ...results };
+      const endtest = performance.now();
+      console.log("testtime", endtest - test);
     },
     setResults(state) {
       const results = state.results;
@@ -149,8 +158,10 @@ export const {
   updateTestCode,
   updateSetupCode,
   deleteTestCode,
+  runTestRerender,
   runTests,
   setResults,
   setIterations,
+  updateProgress,
 } = codeTestSlice.actions;
 export default codeTestSlice.reducer;

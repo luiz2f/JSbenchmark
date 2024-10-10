@@ -68,7 +68,7 @@ export const Violin = ({ width, height, data, smoothing, bucketNumber }) => {
   });
 
   return (
-    <svg width={width} height={height}>
+    <svg width={width} height={height} className="violin">
       <g
         width={boundsWidth}
         height={boundsHeight}

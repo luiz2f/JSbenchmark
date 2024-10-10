@@ -21,7 +21,7 @@ function Logo() {
       t1.to(
         [".text-logo"],
         {
-          right: "-120vw",
+          left: "120vw",
           duration: 0.2,
           ease: "power2.in", // Efeito de animação
         },
@@ -33,13 +33,16 @@ function Logo() {
         })
         .to(".complete-logo", {
           width: "140px",
+          top: 0,
           position: "fixed",
+          justifyContent: "unset",
           duration: 0.01,
         })
         .set(".car-logo", {
-          left: "280%",
-          top: "-120%",
+          left: "400px",
+          top: "-200px",
           width: "60%",
+          paddingTop: "40%",
           duration: 0.01,
           backgroundColor: "inherit",
         })
@@ -48,14 +51,13 @@ function Logo() {
           duration: 0.01,
         })
         .set(".text-logo", {
-          left: "-10vw",
-          bottom: "24%",
+          left: "-250px",
+          top: "38px",
           duration: 0.01,
         })
         .to(".text-logo", {
-          left: "30%",
-          top: "inherit",
-          bottom: "24%",
+          left: "12px",
+          top: "38px",
           duration: 0.2,
 
           ease: "power2.out",
@@ -63,8 +65,8 @@ function Logo() {
         .to(
           ".car-logo",
           {
-            left: "31%",
-            top: "-1%",
+            left: "12px",
+            top: "0",
             duration: 0.2,
             ease: "power2.out",
           },
@@ -96,13 +98,13 @@ function Logo() {
     // car-logo
     function exitAnimation() {
       t1.to(".text-logo", {
-        left: "-100%",
+        left: "-100px",
         duration: 0.1,
         ease: "power2.in",
       })
         .to(".car-logo", {
-          left: "-100%",
-          top: "60%",
+          left: "-400px",
+          top: "200px",
           duration: 0.1,
           ease: "power2.in",
         })
@@ -117,36 +119,34 @@ function Logo() {
         .set(".complete-logo", {
           width: "300px",
           position: "relative",
+          justifyContent: "center",
           duration: 0.01,
         })
         .set(".text-logo", {
-          left: "inherit",
-
-          right: "-120vw",
-          bottom: "24%",
+          left: "120vw",
+          top: "24%",
           duration: 0.01,
           ease: "power2.in",
         })
         .set(".car-logo", {
           width: "100%",
-          top: -280,
-          left: "50vw",
+          paddingTop: "100%",
+          top: "-280px",
+          left: "500px",
           duration: 0.01,
           ease: "power2.in",
         })
-
         .to(".text-logo", {
-          right: "11%",
-          bottom: "24%",
+          top: "64%",
+          left: "63%",
           duration: 0.2,
           ease: "power2.out",
         })
         .to(
           ".car-logo",
           {
-            width: "100%",
-            left: "0%",
-            top: "0%",
+            left: "0",
+            top: "0",
             duration: 0.2,
             ease: "power2.out",
           },

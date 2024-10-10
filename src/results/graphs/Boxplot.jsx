@@ -14,7 +14,7 @@ export const Boxplot = ({ width, height, data }) => {
 
   // Compute everything derived from the dataset:
   const { chartMin, chartMax, groups } = useMemo(() => {
-    const chartMin = d3.min(data, (d) => d.value) * 0.95;
+    const chartMin = d3.min(data, (d) => d.value) * 0.5;
     const chartMax = d3.max(data, (d) => d.value) * 1.05;
     const groups = [...new Set(data?.map((d) => d.name))];
     return { chartMin, chartMax, groups };
@@ -81,7 +81,7 @@ export const Boxplot = ({ width, height, data }) => {
   });
 
   return (
-    <svg width={width} height={height}>
+    <svg width={width} height={height} className="boxplot">
       <g
         width={boundsWidth}
         height={boundsHeight}

@@ -1,29 +1,30 @@
 import { useDispatch, useSelector } from "react-redux";
 import CodeEditor from "./CodeEditor";
 import { useState } from "react";
-import { addTestCode, runTests } from "../codeTest/codeTestSlice";
+import { addTestCode } from "../store/slices/codeTestSlice";
 import Setup from "../setup/Setup";
+import RunTest from "./RunTest";
 
 function Codes() {
-  const { testCodes, setupCode } = useSelector((state) => state.codeTest);
+  const { testCodes, setupCode, iterations } = useSelector(
+    (state) => state.codeTest
+  );
+  const testCodesSize = testCodes?.length;
+  const { darkMode } = useSelector((state) => state.darkMode);
   const dispatch = useDispatch();
   const [error, setError] = useState(false);
+  const isDisabledRunTest = iterations < 1 || testCodesSize <= 0;
+  const isDisabledTests = testCodesSize > 4;
 
   function addTest() {
-    if (testCodes?.length < 5) {
+    if (testCodesSize < 5) {
       dispatch(addTestCode());
     } else setError(true);
   }
 
-  function handleRunTest() {
-    dispatch(runTests());
-  }
-
   return (
     <div className="codes">
-      <Setup />
-
-      <CodeEditor isTest={false} code={setupCode} />
+      <CodeEditor isTest={false} code={setupCode} darkMode={darkMode} />
       {testCodes.map((_, index) => {
         const test = testCodes[index];
         return (
@@ -34,18 +35,27 @@ function Codes() {
             name={test?.name}
             isTest={true}
             code={test?.code}
+            darkMode={darkMode}
           />
         );
       })}
 
       {error ? <p className="err">Max test units: 5</p> : ""}
+      <Setup iterations={iterations} />
+
       <div className="test-btns">
-        <button className="btn add-test" onClick={() => addTest()}>
-          + Add Test
+        <button
+          disabled={isDisabledTests}
+          className="btn add-test"
+          onClick={() => addTest()}
+        >
+          {isDisabledTests ? "5 tests limit" : "+ Add Test"}
         </button>
-        <button onClick={() => handleRunTest()} className="btn run-test">
-          Run Test
-        </button>
+        <RunTest
+          iterations={iterations}
+          isDisabledRunTest={isDisabledRunTest}
+          dispatch={dispatch}
+        />
       </div>
     </div>
   );

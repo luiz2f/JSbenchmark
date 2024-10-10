@@ -29,7 +29,7 @@ export const AxisBottom = ({ xScale }) => {
           <text
             key={value}
             style={{
-              fontSize: "10px",
+              fontSize: "12px",
               textAnchor: "middle",
               transform: "translateY(20px)",
             }}
