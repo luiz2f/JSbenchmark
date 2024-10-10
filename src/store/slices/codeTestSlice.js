@@ -32,13 +32,8 @@ const initialState = {
   iterations: 1000,
   // estado inicial
   setupCode: `// setup your data or function to be called
-  const arr = [0,10,20,30, 25, 15, 12, 2, 143, 15, 0, 10, 20, 30, 25, 15, 12, 2, 143, 15, 10, 20, 10, 20, 30, 25, 15, 12, 2, 143,
-  1, 0, 10, 20, 30, 25, 15, 12, 2, 143, 15, 10, 20, 10, 20, 30, 25, 15, 12, 2,
-  143, 1, 0, 10, 20, 30, 25, 15, 12, 2, 143, 15, 10, 20, 10, 20, 30, 25, 15, 12,
-  2, 143, 1, 0, 10, 20, 30, 25, 15, 12, 2, 143, 15, 10, 20, 10, 20, 30, 25, 15,
-  12, 2, 143, 1,]
-  function greaterThan10(n) { return n > 10}
-  `,
+const arr = [ 18, 15, 15, 18, 12, 16, 8, -12, -12, -14, 16, -6, 15, 0, 18, -13, 3, 15, -13, 6, -3, 6, -5, 0, -7, 12, 13, 6, 6, 5, -9, 8, 0, 19,  -10, -13, -13, 6, 10, -6, 12, 12, -2, 0, 10, -1, -14, -11, -10, 19, -4, 7, -9, -15, 11, 14, 0, -8, 3, 9, -13, 11, -15, 4, -9, 5, 12, 0, -1, -8, -6, -9, -5, -4, -2, -14, -9, -5, -8, 11, -4,  -7, 11, -8, 19, 15, -2, 6, 11, -7, -7, 19, 19, -3, 14, -4, 3,  -2, -9, -10 ];
+function greaterThan10(n) { return n > 10}`,
   testCodes: [
     {
       id: 1,
@@ -52,6 +47,7 @@ const initialState = {
     }
     return ans
 };
+// call your test function
 filter(arr, greaterThan10)`,
     },
     {
@@ -60,6 +56,7 @@ filter(arr, greaterThan10)`,
       code: `var filter = function(arr, fn) {
     return arr.filter(fn)
 };
+// call your test function 
 filter(arr, greaterThan10)`,
     },
   ],
