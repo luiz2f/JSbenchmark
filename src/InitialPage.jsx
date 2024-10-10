@@ -1,7 +1,10 @@
-import Codes from "./codes/Codes";
+import { lazy } from "react";
 import Logo from "./Logo";
-import Results from "./results/Results";
 import DarkModeToggle from "./ui/DarkModeToggle";
+
+const Codes = lazy(() => import("./codes/Codes"));
+
+const Results = lazy(() => import("./results/Results"));
 
 function InitialPage() {
   return (

@@ -115,7 +115,6 @@ const codeTestSlice = createSlice({
       state.progress = state.progress + 1;
     },
     runTests(state) {
-      const test = performance.now();
       const results = { boxplot: [], averageSpeed: [] };
       state.progress = 0;
       state.testCodes.forEach((test) => {
@@ -141,8 +140,6 @@ const codeTestSlice = createSlice({
         });
       });
       state.results = { ...state.results, ...results };
-      const endtest = performance.now();
-      console.log("testtime", endtest - test);
     },
     setResults(state) {
       const results = state.results;

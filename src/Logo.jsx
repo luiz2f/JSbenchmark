@@ -77,23 +77,6 @@ function Logo() {
         animationInProgress.current = false;
       });
     }
-    // const exit = gsap.timeline({
-    //   scrollTrigger: {
-    //     trigger: ".codes",
-    //     toggleActions: "none none none play",
-    //     start: "-50px 0%",
-    //     end: "0px 0%",
-    //     markers: {
-    //       startColor: "red",
-    //       endColor: "red",
-    //       fontSize: "3rem",
-    //     },
-    //     onEnter: () => console.log("2 Enter"),
-    //     onLeave: () => console.log("2 Leave"),
-    //     onEnterBack: () => console.log("2 EnterBack"),
-    //     onLeaveBack: () => console.log("2 LeaveBack"),
-    //   },
-    // });
 
     // car-logo
     function exitAnimation() {
