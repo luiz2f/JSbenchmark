@@ -88,7 +88,7 @@ export const Boxplot = ({ width, height, data }) => {
         transform={`translate(${[MARGIN.left, MARGIN.top].join(",")})`}
       >
         {allShapes}
-        <AxisLeft yScale={yScale} pixelsPerTick={30} />
+        <AxisLeft yScale={yScale} pixelsPerTick={50} />
         {/* X axis uses an additional translation to appear at the bottom */}
         <g transform={`translate(0, ${boundsHeight})`}>
           <AxisBottom xScale={xScale} />

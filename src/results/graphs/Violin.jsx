@@ -75,7 +75,7 @@ export const Violin = ({ width, height, data, smoothing, bucketNumber }) => {
         transform={`translate(${[MARGIN.left, MARGIN.top].join(",")})`}
       >
         {allViolins}
-        <AxisLeft yScale={yScale} pixelsPerTick={30} />
+        <AxisLeft yScale={yScale} pixelsPerTick={50} />
         <g transform={`translate(0, ${boundsHeight})`}>
           <AxisBottom xScale={xScale} />
         </g>
